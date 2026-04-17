@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3ESC223 — Didactique S&T au primaire II</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a3a2e;
+    --moss: #2d5c42;
+    --sage: #5a8a6a;
+    --mist: #a8c4b4;
+    --parchment: #f5f0e8;
+    --cream: #faf7f2;
+    --bark: #3d2b1f;
+    --amber: #c47c2b;
+    --sky: #e8f0ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    line-height: 1.7;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: var(--forest);
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(90,138,106,0.3) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 10%;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,124,43,0.15) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mist);
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(168,196,180,0.25);
+  }
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-meta-item .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .hero-meta-item .value {
+    font-size: 14px;
+    color: #fff;
+  }
+
+  /* ---- NAV ---- */
+  .sticky-nav {
+    background: var(--forest);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(90,138,106,0.3);
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: none;
+    color: var(--mist);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    color: #fff;
+    border-bottom-color: var(--amber);
+  }
+
+  /* ---- LAYOUT ---- */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    padding: 64px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .section-title .num {
+    font-size: 13px;
+    color: var(--sage);
+    letter-spacing: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+  }
+  .section-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--amber);
+    margin-bottom: 36px;
+  }
+
+  /* ---- INTENTION CARD ---- */
+  .intention-card {
+    background: var(--forest);
+    color: #fff;
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .intention-card::before {
+    content: '❝';
+    font-family: serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+  .intention-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- OBJECTIFS ---- */
+  .objectifs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .obj-card {
+    background: #fff;
+    border: 1px solid rgba(90,138,106,0.2);
+    border-radius: 10px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--sage);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .obj-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,58,46,0.1);
+  }
+  .obj-card .obj-level {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+  .obj-card .obj-verb {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 8px;
+  }
+  .obj-card p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ---- PROF ---- */
+  .prof-card {
+    background: var(--sky);
+    border-radius: 12px;
+    padding: 36px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .prof-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--moss);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  .prof-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--forest);
+  }
+  .prof-info .title { color: var(--sage); font-size: 14px; margin-top: 4px; }
+  .prof-info .email { 
+    margin-top: 8px; font-size: 14px;
+    color: var(--moss);
+    text-decoration: none;
+  }
+  .prof-info .email:hover { text-decoration: underline; }
+
+  /* ---- CALENDRIER ---- */
+  .week-block {
+    margin-bottom: 40px;
+  }
+  .week-header {
+    background: var(--forest);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .week-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+  }
+  .week-header .week-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+  .week-body {
+    border: 1px solid rgba(90,138,106,0.2);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+  }
+  .day-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    border-bottom: 1px solid rgba(90,138,106,0.1);
+  }
+  .day-row:last-child { border-bottom: none; }
+  .day-label {
+    background: var(--sky);
+    padding: 20px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-right: 1px solid rgba(90,138,106,0.1);
+  }
+  .session-cell {
+    padding: 20px;
+    border-right: 1px solid rgba(90,138,106,0.1);
+  }
+  .session-cell:last-child { border-right: none; }
+  .session-time {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .session-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--forest);
+    margin-bottom: 8px;
+  }
+  .session-desc {
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .eval-banner {
+    background: linear-gradient(135deg, rgba(196,124,43,0.1), rgba(90,138,106,0.1));
+    border-left: 3px solid var(--amber);
+    padding: 20px 24px;
+    margin-top: 12px;
+    border-radius: 0 8px 8px 0;
+  }
+  .eval-banner .eval-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .eval-banner .eval-title {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+  .eval-banner p { font-size: 13px; color: #555; }
+
+  /* ---- EVALUATIONS TABLE ---- */
+  .eval-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .eval-table thead th {
+    background: var(--forest);
+    color: #fff;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .eval-table tbody tr:nth-child(even) {
+    background: var(--sky);
+  }
+  .eval-table tbody td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(90,138,106,0.1);
+    vertical-align: top;
+  }
+  .eval-table tbody td:first-child {
+    font-weight: 600;
+    color: var(--forest);
+  }
+  .weight-badge {
+    display: inline-block;
+    background: var(--moss);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* ---- NOTATION ---- */
+  .notation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .note-cell {
+    background: #fff;
+    border: 1px solid rgba(90,138,106,0.2);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .note-cell .grade {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--forest);
+  }
+  .note-cell .range {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* ---- IA ---- */
+  .ia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .ia-card {
+    border-radius: 10px;
+    padding: 28px;
+  }
+  .ia-card.allowed {
+    background: rgba(90,138,106,0.08);
+    border: 1px solid rgba(90,138,106,0.25);
+  }
+  .ia-card.forbidden {
+    background: rgba(196,124,43,0.06);
+    border: 1px solid rgba(196,124,43,0.25);
+  }
+  .ia-card h4 {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ia-card.allowed h4 { color: var(--moss); }
+  .ia-card.forbidden h4 { color: var(--amber); }
+  .ia-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ia-card ul li {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+  .ia-card.allowed ul li::before { content: '✓'; position: absolute; left: 0; color: var(--sage); }
+  .ia-card.forbidden ul li::before { content: '✗'; position: absolute; left: 0; color: var(--amber); }
+
+  /* ---- INFO CARDS ---- */
+  .info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .info-card {
+    background: #fff;
+    border: 1px solid rgba(90,138,106,0.15);
+    border-radius: 10px;
+    padding: 28px;
+  }
+  .info-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--forest);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(90,138,106,0.15);
+  }
+  .info-card p, .info-card li {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.7;
+  }
+  .info-card ul { padding-left: 18px; }
+  .info-card a { color: var(--moss); }
+
+  /* ---- DATES TABLE ---- */
+  .dates-list {
+    border: 1px solid rgba(90,138,106,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .date-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(90,138,106,0.1);
+  }
+  .date-row:last-child { border-bottom: none; }
+  .date-date {
+    background: var(--sky);
+    min-width: 130px;
+    padding: 14px 18px;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--forest);
+    border-right: 1px solid rgba(90,138,106,0.1);
+    display: flex;
+    align-items: center;
+  }
+  .date-desc {
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: #555;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--forest);
+    color: var(--mist);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 640px) {
+    .day-row { grid-template-columns: 1fr; }
+    .day-label { padding: 10px 16px; justify-content: flex-start; }
+    .ia-grid, .info-cards { grid-template-columns: 1fr; }
+    .notation-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 48px 20px 40px; }
+  }
+
+  .highlight-box {
+    background: var(--parchment);
+    border-left: 4px solid var(--sage);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .pill {
+    display: inline-block;
+    background: var(--sky);
+    border: 1px solid rgba(90,138,106,0.3);
+    color: var(--moss);
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin: 3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">UQAC · Sciences de l'éducation · Été 2026</p>
+    <h1>Didactique de la <em>science et technologie</em> au primaire II</h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">Sigle</span>
+        <span class="value">3ESC223 — Groupe 31</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Crédits</span>
+        <span class="value">3 crédits</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Local</span>
+        <span class="value">D-230-0</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Personne enseignante</span>
+        <span class="value">Emmanuelle Aurousseau, Ph.D.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="goTo('intention', this)">Intention</button>
+    <button class="nav-btn" onclick="goTo('prof', this)">Enseignante</button>
+    <button class="nav-btn" onclick="goTo('objectifs', this)">Objectifs</button>
+    <button class="nav-btn" onclick="goTo('calendrier', this)">Calendrier</button>
+    <button class="nav-btn" onclick="goTo('evaluations', this)">Évaluations</button>
+    <button class="nav-btn" onclick="goTo('ia', this)">IA</button>
+    <button class="nav-btn" onclick="goTo('infos', this)">Infos pratiques</button>
+  </div>
+</nav>
+
+<!-- INTENTION PÉDAGOGIQUE -->
+<section id="intention">
+  <h2 class="section-title"><span class="num">01</span> Intention pédagogique</h2>
+  <div class="section-divider"></div>
+  <div class="intention-card">
+    <p>Ce cours vise à accompagner les personnes étudiantes en formation initiale à l'enseignement dans le développement d'une <strong>posture didactique critique, créative et inclusive</strong> en science et technologie — en les amenant à comprendre les fondements épistémologiques de la discipline, à maîtriser ses démarches et contenus, à intégrer les savoirs autochtones de manière respectueuse et à concevoir des situations d'apprentissage adaptées à la diversité des élèves du primaire.</p>
+  </div>
+  <div style="margin-top: 28px;">
+    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--forest); margin-bottom: 16px;">Formule pédagogique</h3>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <span class="pill">🧪 Ateliers pratiques</span>
+      <span class="pill">🏛️ Sortie au Musée Ilnu de Mashteuiatsh</span>
+      <span class="pill">👥 Travaux d'équipe</span>
+      <span class="pill">🌿 Savoirs autochtones</span>
+      <span class="pill">💬 Discussions collectives</span>
+    </div>
+  </div>
+</section>
+
+<!-- ENSEIGNANTE -->
+<section id="prof" style="background: var(--sky); padding-top: 64px; padding-bottom: 64px; max-width: 100%;">
+  <div class="container">
+    <h2 class="section-title"><span class="num">02</span> Personne enseignante</h2>
+    <div class="section-divider"></div>
+    <div class="prof-card">
+      <div class="prof-avatar">🌿</div>
+      <div class="prof-info">
+        <h3>Emmanuelle Aurousseau, Ph.D.</h3>
+        <p class="title">Chargée de cours en didactique des sciences</p>
+        <p class="title">Postdoctorante — Mobilisation des savoirs et perspectives autochtones dans les programmes scolaires · Approches interculturelles en éducation</p>
+        <a href="mailto:Emmanuelle_Aurousseau@uqac.ca" class="email">📧 Emmanuelle_Aurousseau@uqac.ca</a>
+        <p style="margin-top: 8px; font-size: 13px; color: var(--sage);">Suivi individuel disponible sur Zoom entre les rencontres</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIFS -->
+<section id="objectifs">
+  <h2 class="section-title"><span class="num">03</span> Objectifs d'apprentissage</h2>
+  <div class="section-divider"></div>
+  <div class="objectifs-grid">
+    <div class="obj-card">
+      <p class="obj-level">Niveau 1 — Comprendre</p>
+      <p class="obj-verb">Fondements et contenus</p>
+      <p>Expliquer les fondements épistémologiques S-T, situer les savoirs autochtones, utiliser des grilles d'analyse de productions d'élèves.</p>
+    </div>
+    <div class="obj-card" style="border-top-color: var(--amber);">
+      <p class="obj-level" style="color: var(--amber);">Niveau 2 — Appliquer</p>
+      <p class="obj-verb">Démarches en contexte</p>
+      <p>Mener une investigation sur un phénomène réel, mobiliser les contenus des quatre univers S-T dans des activités pédagogiques contextualisées.</p>
+    </div>
+    <div class="obj-card" style="border-top-color: var(--moss);">
+      <p class="obj-level" style="color: var(--moss);">Niveau 3 — Analyser</p>
+      <p class="obj-verb">Situations pédagogiques</p>
+      <p>Dégager les forces et limites d'une situation d'apprentissage, examiner une QSV sous ses dimensions scientifique, sociale, éthique et autochtone.</p>
+    </div>
+    <div class="obj-card" style="border-top-color: #7a8c6e;">
+      <p class="obj-level" style="color: #7a8c6e;">Niveau 4 — Évaluer</p>
+      <p class="obj-verb">Choix pédagogiques</p>
+      <p>Justifier ses choix didactiques en lien avec le PFÉQ et le référentiel du MEQ, porter un regard critique sur ses représentations.</p>
+    </div>
+    <div class="obj-card" style="border-top-color: #4a7a5e; grid-column: span 2;">
+      <p class="obj-level" style="color: #4a7a5e;">Niveau 5 — Créer</p>
+      <p class="obj-verb">Situations d'apprentissage inclusives</p>
+      <p>Concevoir des situations S-T intégrant une démarche scientifique ou technologique, des contenus disciplinaires et au moins une perspective interdisciplinaire ou culturelle. Élaborer des outils d'évaluation cohérents, produire une planification à long terme tenant compte des quatre univers, des trois compétences du programme et des réalités de la classe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDRIER -->
+<section id="calendrier" style="background: var(--parchment); max-width: 100%; padding: 64px 0;">
+  <div class="container">
+    <h2 class="section-title"><span class="num">04</span> Calendrier du cours</h2>
+    <div class="section-divider"></div>
+
+    <!-- Dates importantes -->
+    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 16px;">Dates importantes — Été 2026</h3>
+    <div class="dates-list" style="margin-bottom: 48px;">
+      <div class="date-row"><span class="date-date">4 mai 2026</span><span class="date-desc">📅 Début du cours</span></div>
+      <div class="date-row"><span class="date-date">14 mai</span><span class="date-desc">Date limite d'annulation avec remboursement</span></div>
+      <div class="date-row"><span class="date-date">28 mai</span><span class="date-desc">📅 Fin du cours</span></div>
+      <div class="date-row"><span class="date-date">1er juillet</span><span class="date-desc">Date limite d'abandon sans mention d'échec et sans remboursement</span></div>
+      <div class="date-row"><span class="date-date">19 août</span><span class="date-desc">Fin du trimestre</span></div>
+    </div>
+
+    <!-- SEMAINE 1 -->
+    <div class="week-block">
+      <div class="week-header">
+        <h3>Semaine 1</h3>
+        <span class="week-label">Fondements · Démarches · Univers matériel</span>
+      </div>
+      <div class="week-body">
+        <div class="day-row">
+          <span class="day-label">Jeudi</span>
+          <div class="session-cell">
+            <p class="session-time">AM — S1</p>
+            <p class="session-title">Fondements didactiques et épistémologiques</p>
+            <p class="session-desc">Présentation et introduction au cours (30 min) · Programme S-T : fondements, compétences et démarches (1h) · Présentation de la sortie au Musée Ilnu (10 min) · Épistémologie autochtone : réflexion écrite individuelle (30 min)</p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">PM — S2</p>
+            <p class="session-title">Démarches en S&T</p>
+            <p class="session-desc">Démarches S-T (investigation, modélisation, vulgarisation) · Atelier : qu'est-ce qui isole le mieux du froid? (1h) · Introduction à la grille d'analyse de productions d'élèves (1h)</p>
+          </div>
+        </div>
+        <div class="day-row">
+          <span class="day-label">Vendredi</span>
+          <div class="session-cell">
+            <p class="session-time">AM — S3</p>
+            <p class="session-title">Univers matériel — Énergie, circuits et systèmes (1)</p>
+            <p class="session-desc">Conception & analyse technologiques · Systèmes mécaniques — démontage d'objets technologiques (45 min) · Schéma de principe</p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">PM — S4</p>
+            <p class="session-title">Univers matériel — Énergie, circuits et systèmes (2)</p>
+            <p class="session-desc">Énergie et circuits électriques — manipulation en équipe (1h) · Énergie et territoire : enjeux pour les communautés autochtones (1h) · Ébauche de leçon intégrant ces savoirs (1h)</p>
+          </div>
+        </div>
+      </div>
+      <div class="eval-banner">
+        <p class="eval-label">Évaluation 1 · 20 %</p>
+        <p class="eval-title">Analyser et concevoir une activité S-T</p>
+        <p>Expliquer une démarche, dégager forces et limites d'une production d'élève, proposer et concevoir une activité cohérente. Remise : semaine 1 · Équipe · Notation individualisée (pairs)</p>
+      </div>
+    </div>
+
+    <!-- SEMAINE 2 -->
+    <div class="week-block">
+      <div class="week-header">
+        <h3>Semaine 2</h3>
+        <span class="week-label">Terre et espace · Savoirs autochtones · Sortie Musée Ilnu</span>
+      </div>
+      <div class="week-body">
+        <div class="day-row">
+          <span class="day-label">Jeudi</span>
+          <div class="session-cell">
+            <p class="session-time">AM — S5</p>
+            <p class="session-title">Savoirs autochtones — technologie, modes de vie et territoire</p>
+            <p class="session-desc">Savoirs autochtones et technologie · Construction d'un petit canot d'écorce · Ébauche de séquence mobilisant les savoirs autochtones · Expérimentation : changements d'état et cycle de l'eau</p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">PM — S6</p>
+            <p class="session-title">Matière, système Terre-Soleil-Lune, météo et savoirs autochtones</p>
+            <p class="session-desc">Concepts Terre-Soleil-Lune : jour/nuit et saisons, modélisation · Savoirs Inuit et Cris sur le territoire · Comparaison savoirs scientifiques / autochtones · Ébauche de planification intégrant météo et savoirs autochtones</p>
+          </div>
+        </div>
+        <div class="day-row">
+          <span class="day-label">Vendredi</span>
+          <div class="session-cell" style="background: rgba(90,138,106,0.04);">
+            <p class="session-time" style="color: var(--moss);">★ AM — SORTIE TERRAIN</p>
+            <p class="session-title">Musée Ilnu de Mashteuiatsh</p>
+            <p class="session-desc">Visite guidée : exposition Tshilanu Ilnuatsh · Sentier Nuhtshimitsh — savoirs botaniques et médicinaux des Pekuakamiulnuatsh · Serre-école (plantes boréales) · Rencontre avec un médiateur culturel<br><em style="font-size: 11px; color: var(--sage);">1787, rue Amihsk, Mashteuiatsh (Lac-Saint-Jean)</em></p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">PM — S7</p>
+            <p class="session-title">Retour de sortie et univers vivant</p>
+            <p class="session-desc">Objectivation collective de la sortie (45 min) · Organisation du vivant : cellules, classification, biodiversité locale (1h) · Liens entre savoirs botaniques ilnus et contenus S-T (1h)</p>
+          </div>
+        </div>
+      </div>
+      <div class="eval-banner">
+        <p class="eval-label">Évaluation 2 · 25 %</p>
+        <p class="eval-title">Planification courte intégrant savoirs autochtones</p>
+        <p>Décrire un phénomène observé, mettre en relation savoirs scientifiques et autochtones, proposer une activité pédagogique. Remise : semaine 2 · Équipe · Notation individualisée (pairs)</p>
+      </div>
+    </div>
+
+    <!-- SEMAINE 3 -->
+    <div class="week-block">
+      <div class="week-header">
+        <h3>Semaine 3</h3>
+        <span class="week-label">Univers vivant · QSV · Classe multiâge · Évaluation</span>
+      </div>
+      <div class="week-body">
+        <div class="day-row">
+          <span class="day-label">Jeudi</span>
+          <div class="session-cell">
+            <p class="session-time">AM — S8</p>
+            <p class="session-title">Univers vivant — Alimentation, énergie et savoirs autochtones</p>
+            <p class="session-desc">Chaînes alimentaires, réseaux trophiques, photosynthèse et cycle de l'énergie (1h) · Les Trois Sœurs comme écosystème cultivé — dialogue S-T et savoirs autochtones (1h) · Planification de séance en équipe</p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">PM — S9</p>
+            <p class="session-title">Questions socialement vives et interdisciplinarité</p>
+            <p class="session-desc">QSV — cadres théoriques (30 min) · Analyse de QSV : eau, biodiversité, déchets, changements climatiques (45 min) · Lancement du projet interdisciplinaire — choix QSV (1h15)</p>
+          </div>
+        </div>
+        <div class="day-row">
+          <span class="day-label">Vendredi</span>
+          <div class="session-cell">
+            <p class="session-time">AM — S10</p>
+            <p class="session-title">Classe multiâge et différenciation en S-T</p>
+            <p class="session-desc">Défis pédagogiques de la classe multiâge en S-T (1h) · Atelier : conception d'une activité S-T différenciée pour 2 cycles (1h30)</p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">PM — S11</p>
+            <p class="session-title">Évaluation en S-T — Cadres, critères et outils</p>
+            <p class="session-desc">Les trois compétences S-T du PFÉQ (1h) · Conception d'une grille d'évaluation pour une démarche scientifique (1h) · Réflexion : évaluer des apprentissages liés aux savoirs autochtones (1h)</p>
+          </div>
+        </div>
+      </div>
+      <div class="eval-banner">
+        <p class="eval-label">Évaluation 3 · 25 %</p>
+        <p class="eval-title">Concevoir une situation d'apprentissage intégrant QSV et adaptation</p>
+        <p>Expliquer une QSV, mobiliser une démarche S-T, adapter à différents élèves, concevoir une situation cohérente avec élément d'évaluation. Remise : semaine 3 · Équipe · Notation individualisée (pairs)</p>
+      </div>
+    </div>
+
+    <!-- SEMAINE 4 -->
+    <div class="week-block">
+      <div class="week-header">
+        <h3>Semaine 4</h3>
+        <span class="week-label">Planification à long terme · Présentations finales · Bilan</span>
+      </div>
+      <div class="week-body">
+        <div class="day-row">
+          <span class="day-label">Jeudi</span>
+          <div class="session-cell" style="grid-column: span 2;">
+            <p class="session-time">AM — S12</p>
+            <p class="session-title">Planification à long terme — Atelier en équipe</p>
+            <p class="session-desc">Présentation du gabarit de planification annuelle (30 min) · Atelier de planification guidé en équipe (1h30) · Retour par les pairs sur les planifications (30 min)</p>
+          </div>
+        </div>
+        <div class="day-row">
+          <span class="day-label">Vendredi</span>
+          <div class="session-cell">
+            <p class="session-time">PM — S13</p>
+            <p class="session-title">Présentations finales — Projets interdisciplinaires (partie 1)</p>
+            <p class="session-desc">Présentations des projets (15 min/équipe) · Rétroaction collective structurée (10 min/équipe) · Préparation du bilan collectif</p>
+          </div>
+          <div class="session-cell">
+            <p class="session-time">AM — S14</p>
+            <p class="session-title">Présentations finales (partie 2) et bilan du cours</p>
+            <p class="session-desc">Présentations des équipes restantes · Rétroaction collective (30 min) · Bilan : ce qui demeure, ce qui a changé (45 min) · Réflexion finale sur l'intégration des savoirs autochtones (45 min)</p>
+          </div>
+        </div>
+      </div>
+      <div class="eval-banner">
+        <p class="eval-label">Évaluation 4 · 30 %</p>
+        <p class="eval-title">Projet interdisciplinaire (présentation + synthèse)</p>
+        <p>Structurer une QSV, élaborer un projet interdisciplinaire cohérent, justifier les choix pédagogiques, présenter clairement la démarche. Remise : semaine 4 · Équipe · Notation individualisée (pairs)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÉVALUATIONS -->
+<section id="evaluations">
+  <h2 class="section-title"><span class="num">05</span> Évaluations</h2>
+  <div class="section-divider"></div>
+
+  <table class="eval-table">
+    <thead>
+      <tr>
+        <th>Travail</th>
+        <th>Description</th>
+        <th>Pondération</th>
+        <th>Remise</th>
+        <th>Modalité</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>E1</td>
+        <td>Analyser et concevoir une activité S-T</td>
+        <td><span class="weight-badge">20 %</span></td>
+        <td>Semaine 1</td>
+        <td>Équipe · Pairs</td>
+      </tr>
+      <tr>
+        <td>E2</td>
+        <td>Planification courte intégrant savoirs autochtones</td>
+        <td><span class="weight-badge">25 %</span></td>
+        <td>Semaine 2</td>
+        <td>Équipe · Pairs</td>
+      </tr>
+      <tr>
+        <td>E3</td>
+        <td>Concevoir une situation d'apprentissage intégrant QSV et adaptation</td>
+        <td><span class="weight-badge">25 %</span></td>
+        <td>Semaine 3</td>
+        <td>Équipe · Pairs</td>
+      </tr>
+      <tr>
+        <td>E4</td>
+        <td>Projet interdisciplinaire (présentation + synthèse)</td>
+        <td><span class="weight-badge">30 %</span></td>
+        <td>Semaine 4</td>
+        <td>Équipe · Pairs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 40px;">
+    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 16px;">Système de notation</h3>
+    <div class="notation-grid">
+      <div class="note-cell"><p class="grade">A+</p><p class="range">95–100</p></div>
+      <div class="note-cell"><p class="grade">B+</p><p class="range">84–86</p></div>
+      <div class="note-cell"><p class="grade">C+</p><p class="range">74–76</p></div>
+      <div class="note-cell"><p class="grade">D+</p><p class="range">64–66</p></div>
+      <div class="note-cell"><p class="grade">A</p><p class="range">90–94</p></div>
+      <div class="note-cell"><p class="grade">B</p><p class="range">80–83</p></div>
+      <div class="note-cell"><p class="grade">C</p><p class="range">70–73</p></div>
+      <div class="note-cell"><p class="grade">D</p><p class="range">60–63</p></div>
+      <div class="note-cell"><p class="grade">A-</p><p class="range">87–89</p></div>
+      <div class="note-cell"><p class="grade">B-</p><p class="range">77–79</p></div>
+      <div class="note-cell"><p class="grade">C-</p><p class="range">67–69</p></div>
+      <div class="note-cell"><p class="grade">E</p><p class="range">59 et moins</p></div>
+    </div>
+    <p style="font-size: 12px; color: #888; margin-top: 12px;">Note I (Incomplet) attribuée pour tout travail remis en retard.</p>
+  </div>
+</section>
+
+<!-- IA -->
+<section id="ia" style="background: var(--sky); max-width: 100%; padding: 64px 0;">
+  <div class="container">
+    <h2 class="section-title"><span class="num">06</span> Intelligence artificielle (IAG)</h2>
+    <div class="section-divider"></div>
+
+    <div class="highlight-box" style="margin-bottom: 28px;">
+      L'IAG est une réalité professionnelle que les futurs enseignants devront maîtriser et utiliser de façon éthique et réfléchie. Son utilisation est <strong>permise et encouragée</strong> à des fins pédagogiques spécifiques, dans le respect de l'intégrité académique.
+    </div>
+
+    <div class="ia-grid">
+      <div class="ia-card allowed">
+        <h4>✅ Utilisations autorisées</h4>
+        <ul>
+          <li>Générer des idées d'activités d'apprentissage</li>
+          <li>Obtenir des suggestions de ressources pédagogiques</li>
+          <li>Identifier des liens interdisciplinaires</li>
+          <li>Obtenir des synthèses préliminaires (à valider)</li>
+          <li>Corriger la grammaire, l'orthographe et la syntaxe</li>
+          <li>Améliorer la clarté et la structure des textes</li>
+        </ul>
+      </div>
+      <div class="ia-card forbidden">
+        <h4>🚫 Interdictions</h4>
+        <ul>
+          <li>Faire rédiger entièrement un travail par l'IA</li>
+          <li>Générer des analyses didactiques complètes présentées comme siennes</li>
+          <li>Remplacer la lecture des textes obligatoires</li>
+          <li>Utiliser sans déclaration explicite dans le travail</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; background: #fff; border-radius: 10px; padding: 24px; border: 1px solid rgba(90,138,106,0.2);">
+      <h4 style="font-weight: 600; margin-bottom: 12px; color: var(--forest);">📋 Format de déclaration obligatoire</h4>
+      <p style="font-size: 13.5px; color: #555; line-height: 1.7;">Ajouter une section <em>« Utilisation de l'intelligence artificielle »</em> à la fin de chaque travail, en précisant : l'outil utilisé (ex. ChatGPT, Claude, Copilot), la partie du travail concernée, et comment les résultats ont été utilisés. Utiliser les <a href="https://www.uqac.ca/ressourcespedago/iag/" style="color: var(--moss);" target="_blank">pictogrammes fournis par le Carrefour pédagogique</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS PRATIQUES -->
+<section id="infos">
+  <h2 class="section-title"><span class="num">07</span> Informations pratiques</h2>
+  <div class="section-divider"></div>
+  <div class="info-cards">
+    <div class="info-card">
+      <h4>📝 Qualité de la langue</h4>
+      <p>La qualité du français fait partie intégrante des exigences. Une pénalité pouvant aller jusqu'à <strong>10 %</strong> de la note totale d'un travail pourra être appliquée en cas de manquements importants (orthographe, grammaire, syntaxe, ponctuation, vocabulaire).</p>
+    </div>
+    <div class="info-card">
+      <h4>🎓 Situations de handicap</h4>
+      <p>Il est de la responsabilité de l'étudiant·e d'informer la personne professeure de toute situation de handicap dès le début du trimestre. Des mesures d'accommodement seront établies en collaboration avec les Services aux étudiants.</p>
+      <p><a href="https://sae.uqac.ca/etudiants-en-situation-de-handicap/" target="_blank">sae.uqac.ca</a></p>
+    </div>
+    <div class="info-card">
+      <h4>📚 Références bibliographiques</h4>
+      <p>Normes APA pour toutes les références. Guide disponible à la bibliothèque UQAC :</p>
+      <p><a href="https://bibliotheque.uqac.ca/rediger-bibliographie/guideapa" target="_blank">bibliotheque.uqac.ca</a></p>
+      <p style="margin-top: 8px;">Bibliothécaire attitré : <strong>Charles-Érick Matton</strong></p>
+    </div>
+    <div class="info-card">
+      <h4>⚖️ Intégrité académique</h4>
+      <p>Tout acte d'infraction (plagiat, collusion, fabrication, autoplagiat) peut entraîner l'annulation d'un élément d'évaluation ou l'échec du cours, voire la suspension de l'UQAC.</p>
+      <p style="margin-top: 8px; color: var(--amber); font-size: 13px;">Les travaux remis en retard reçoivent la note I (Incomplet).</p>
+    </div>
+    <div class="info-card" style="grid-column: span 2;">
+      <h4>🤝 Politique contre le harcèlement et la violence</h4>
+      <p>L'UQAC désavoue toute forme de harcèlement et de violence. Tous les membres de la communauté ont droit à un milieu de travail et d'études exempt de harcèlement. Tout manquement doit être signalé au Comité institutionnel ou au Bureau de réception des plaintes. Plus d'informations : <a href="https://www.uqac.ca/bpi/" target="_blank">Bureau de prévention et d'intervention (uqac.ca)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>3ESC223 · Didactique de la science et technologie au primaire II · Groupe 31 · Été 2026</p>
+  <p style="margin-top: 8px; opacity: 0.6;">Emmanuelle Aurousseau, Ph.D. · UQAC · CÉGEQ de Saint-Félicien</p>
+</footer>
+
+<script>
+function goTo(id, btn) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Highlight active nav on scroll
+const sections = ['intention','prof','objectifs','calendrier','evaluations','ia','infos'];
+window.addEventListener('scroll', () => {
+  let current = sections[0];
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', sections[i] === current);
+  });
+});
+</script>
+</body>
+</html>
